@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class TaxWithholdingCalculator {
+
+    public static double calculateTax(double income) {
+        if (income < 500) {
+            return income * 0.10;
+        } else if (income < 1500) {
+            return income * 0.15;
+        } else if (income < 2500) {
+            return income * 0.20;
+        } else {
+            return income * 0.30;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number of weeks: ");
+        int numberOfWeeks = scanner.nextInt();
+
+        double totalWithholding = 0;
+
+        for (int week = 1; week <= numberOfWeeks; week++) {
+            System.out.print("Enter income for week " + week + ": $");
+            double income = scanner.nextDouble();
+            double withholding = calculateTax(income);
+            System.out.printf("Week %d withholding: $%.2f%n", week, withholding);
+            totalWithholding += withholding;
+        }
+
+        double averageWithholding = totalWithholding / numberOfWeeks;
+        System.out.printf("Average Weekly Withholding: $%.2f%n", averageWithholding);
+
+        scanner.close();
+    }
+}
